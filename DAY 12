@@ -1,0 +1,116 @@
+DAY: 12
+DATE: 19.06.2026
+LEETCODE PROBLEM NO.: 2
+LANGUAGE:Java
+
+QUESTION:
+You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.
+You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+
+Example 1:
+Input: l1 = [2,4,3], l2 = [5,6,4]
+Output: [7,0,8]
+Explanation: 342 + 465 = 807.
+
+Example 2:
+Input: l1 = [0], l2 = [0]
+Output: [0]
+
+Example 3:
+Input: l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]
+Output: [8,9,9,9,0,0,0,1]
+
+SOURCE CODE:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode curr1 = l1;
+        ListNode curr2 = l2;
+        ListNode dummy = new ListNode();
+        ListNode curr3 = dummy;
+        int carry = 0;
+        while (curr1 != null && curr2 != null){
+            int sum = curr1.val + curr2.val+carry;
+            carry = sum/10;
+            int value = sum%10;
+            curr3.next = new ListNode(value);
+            curr3 = curr3.next;
+            curr1 = curr1.next;
+            curr2 = curr2.next;
+        }
+
+        while (curr1 != null){
+            int sum = curr1.val+carry;
+            carry = sum/10;
+            int value = sum%10;
+            curr3.next = new ListNode(value);
+            curr3 = curr3.next;
+            curr1 = curr1.next;
+        }
+        while (curr2 != null){
+            int sum = curr2.val+carry;
+            carry = sum/10;
+            int value = sum%10;
+            curr3.next = new ListNode(value);
+            curr3 = curr3.next;
+            curr2 = curr2.next;
+        }
+        if(carry != 0){
+            curr3.next = new ListNode(carry);
+        }
+        return dummy.next;
+    }
+}
+
+
+SIMPLIFIED VERSION (NO CHANGE IN COMPLEXITY, JUST CODE SIMPLIFICATION):
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode curr1 = l1;
+        ListNode curr2 = l2;
+        ListNode dummy = new ListNode();
+        ListNode curr3 = dummy;
+
+        int carry = 0;
+
+        while(curr1 != null || curr2 != null || carry != 0){
+            int sum = 0;
+            if(curr1!=null){
+                sum = sum + curr1.val;
+                curr1 = curr1.next;
+            }
+            if(curr2 != null){
+                sum = sum + curr2.val;
+                curr2 = curr2.next;
+            }
+            if(carry!=0){
+                sum = sum+carry;
+            }
+            carry = sum /10;
+            curr3.next = new ListNode(sum%10);
+            curr3 = curr3.next;
+        }
+        return dummy.next;
+    }
+}
+
+ISSUES FACED: Think about the simplification of code after getting an approach.
