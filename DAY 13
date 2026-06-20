@@ -1,7 +1,7 @@
-DAY:
-DATE:
-LEETCODE PROBLEM NO.:
-LANGUAGE:
+DAY: 13
+DATE: 20.06.2026
+LEETCODE PROBLEM NO.: 83
+LANGUAGE: Java
 
 QUESTION:
 Given the head of a sorted linked list, delete all duplicates such that each element appears only once. Return the linked list sorted as well.
