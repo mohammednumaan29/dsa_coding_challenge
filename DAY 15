@@ -1,0 +1,88 @@
+DAY: 15
+DATE: 22.06.2026
+
+LEETCODE PROBLEM NO.: 643
+LANGUAGE: Java
+
+QUESTION:
+You are given an integer array nums consisting of n elements, and an integer k.
+Find a contiguous subarray whose length is equal to k that has the maximum average value and return this value. Any answer with a calculation error less than 10-5 will be accepted.
+
+Example 1:
+Input: nums = [1,12,-5,-6,50,3], k = 4
+Output: 12.75000
+Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
+
+Example 2:
+Input: nums = [5], k = 1
+Output: 5.00000
+
+SOURCE CODE:
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        int l = 0;
+        int r = k-1;
+        int ws = 0;
+        for(int i = 0;i<=r;i++){
+            ws = ws + nums[i];
+        }
+        int ms = ws;
+        for(int i = r+1;i<nums.length;i++){
+            ws = ws + nums[i] - nums[i-k];
+            if(ws>ms){
+                ms=ws;
+            }
+        }
+        return (double)ms/k;
+    }
+}
+
+
+LEETCODE QUESTION NO.: 3
+LANGUAGE: Java
+
+QUESTION:
+Given a string s, find the length of the longest substring without duplicate characters.
+
+Example 1:
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3. Note that "bca" and "cab" are also correct answers.
+
+Example 2:
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+
+Example 3:
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+SOURCE CODE:
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int left = 0;
+        int right = 0;
+        int length = 0;
+        HashSet<Character> seen = new HashSet<>();
+        while (right < s.length()){
+            if(seen.contains(s.charAt(right))==false){
+                seen.add(s.charAt(right));
+            }
+            else{
+                while(seen.contains(s.charAt(right))){
+                    seen.remove(s.charAt(left));
+                    left++;
+                }
+                seen.add(s.charAt(right));
+            }
+            right++;
+            length = Math.max(length,right-left);
+        }
+        return length;
+    }
+}
+
+Issues faced: Minor mistake in updation of the window(q2), and incorrect comparison between current and maximum window sum(q1).
