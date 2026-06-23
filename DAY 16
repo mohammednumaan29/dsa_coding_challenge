@@ -1,0 +1,98 @@
+DAY: 16
+DATE: 23.06.2026
+
+LEETCODE QUESTION NO.: 206
+LANGUAGE: Java
+
+QUESTION:
+Given the head of a singly linked list, reverse the list, and return the reversed list.
+
+Example 1:
+Input: head = [1,2,3,4,5]
+Output: [5,4,3,2,1]
+
+Example 2:
+Input: head = [1,2]
+Output: [2,1]
+
+Example 3:
+Input: head = []
+Output: []
+
+SOURCE CODE:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode curr = head;
+        ListNode prev = null;
+        ListNode next;
+        while(curr !=  null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+}
+
+LEETCODE QUESTION NO.: 234
+LANGUAGE: Java
+
+QUESTION: Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+
+Example 1:
+Input: head = [1,2,2,1]
+Output: true
+
+Example 2:
+Input: head = [1,2]
+Output: false
+
+SOURCE CODE:
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        ListNode curr = head;
+        while(fast!=null && fast.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        ListNode prev = null;
+        ListNode next;
+        while(slow!=null){
+            next = slow.next;
+            slow.next = prev;
+            prev = slow;
+            slow = next;
+        }
+        while(prev!=null){
+            if(prev.val!=curr.val){
+                return false;
+            }
+            prev = prev.next;
+            curr = curr.next;
+        }
+        return true;
+    }
+}
