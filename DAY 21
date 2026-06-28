@@ -1,0 +1,210 @@
+DAY: 21
+DATE: 28.06.2026
+LEETCODE QUESTION: 145
+LANGUAGE: JAVA
+QUESTION:
+Given the root of a binary tree, return the postorder traversal of its nodes' values.
+
+Example 1:
+Input: root = [1,null,2,3]
+Output: [3,2,1]
+
+Example 2:
+Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+Output: [4,6,7,5,2,9,8,3,1]
+
+Example 3:
+Input: root = []
+Output: []
+
+Example 4:
+Input: root = [1]
+Output: [1]
+
+SOURCE CODE:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution{
+    private List<Integer> res = new ArrayList<>();
+    public List<Integer> postorderTraversal(TreeNode root) {
+        traverse(root);
+        return res;
+    }
+    public void traverse(TreeNode root){
+        if(root == null){
+            return;
+        }
+        traverse(root.left);
+        traverse(root.right);
+        res.add(root.val);
+    }
+
+}
+
+LEETCODE QUESTION NO.: 144
+LANGUAGE: JAVA
+QUESTION:
+Given the root of a binary tree, return the preorder traversal of its nodes' values.
+
+Example 1:
+Input: root = [1,null,2,3]
+Output: [1,2,3]
+
+Example 2:
+Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+Output: [1,2,4,5,6,7,3,8,9]
+
+Example 3:
+Input: root = []
+Output: []
+
+Example 4:
+Input: root = [1]
+Output: [1]
+
+SOURCE CODE:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private List<Integer> res = new ArrayList<>();
+    public List<Integer> preorderTraversal(TreeNode root) {
+        traverse(root);
+        return res;
+    }
+    public void traverse(TreeNode root){
+        if(root == null){
+            return;
+        }
+        res.add(root.val);
+        traverse(root.left);
+        traverse(root.right);
+
+    }
+}
+
+LEETCODE QUESTION NO.:94
+LANGUAGE: JAVA
+QUESTION:
+Given the root of a binary tree, return the inorder traversal of its nodes' values.
+
+Example 1:
+Input: root = [1,null,2,3]
+Output: [1,3,2]
+
+Example 2:
+Input: root = [1,2,3,4,5,null,8,null,null,6,7,9]
+Output: [4,2,6,5,7,1,3,9,8]
+
+Example 3:
+Input: root = []
+Output: []
+
+Example 4:
+Input: root = [1]
+Output: [1]
+
+SOURCE CODE:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    private List<Integer> res = new ArrayList<>();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        traverse(root);
+        return res;
+    }
+    public void traverse(TreeNode root){
+        if(root == null){
+            return;
+        }
+        traverse(root.left);
+        res.add(root.val);
+        traverse(root.right);
+    }
+}
+
+LEETCODE QUESTION NO.: 100
+LANGUAGE: JAVA
+QUESTION:
+Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+
+Example 1:
+Input: p = [1,2,3], q = [1,2,3]
+Output: true
+Example 2:
+Input: p = [1,2], q = [1,null,2]
+Output: false
+Example 3:
+Input: p = [1,2,1], q = [1,1,2]
+Output: false
+
+SOURCE CODE:
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if(p==null && q==null){
+            return true;
+        }
+        if(p==null || q==null){
+            return false;
+        }
+        if(p.val!=q.val){
+            return false;
+        }
+        return isSameTree(p.left,q.left) && isSameTree(p.right,q.right);
+
+    }
+}
