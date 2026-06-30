@@ -1,6 +1,7 @@
 DAY: 23
 DATE: 30.06.2026
 LEETCODE QUESTION NO.: 49
+LANGUAGE: JAVA
 QUESTION:
 Given an array of strings strs, group the anagrams together. You can return the answer in any order.
 
